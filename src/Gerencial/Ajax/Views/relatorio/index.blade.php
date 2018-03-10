@@ -15,7 +15,7 @@
         <div class="box-body">
 
 
-            <form method="post" action="{{route('relatorio-pagamentos-chart')}}" class="form-inline">
+            <form method="post" action="{{route('ajax.relatorio-pagamentos-chart')}}" class="form-inline">
 				{{csrf_field()}}
 				<div class="form-group mx-sm-3 mb-2">
 						<label> Pagamentos </label>
@@ -33,7 +33,7 @@
 			  </form>	
 
 
-			  <form method="post" action="{{route('relatorio-atendimentos-chart')}}" class="form-inline">
+			  <form method="post" action="{{route('ajax.relatorio-atendimentos-chart')}}" class="form-inline">
 					{{csrf_field()}}
 					<div class="form-group mx-sm-3 mb-2">
 							<label> Atendimentos </label>

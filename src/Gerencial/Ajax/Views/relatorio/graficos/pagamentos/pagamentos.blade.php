@@ -15,7 +15,7 @@
   
   
   <div class="col-md-12">
-    <form method="post" action="{{route('relatorio-pagamentos-chart')}}" class="form-inline">
+    <form method="post" action="{{route('ajax.relatorio-pagamentos-chart')}}" class="form-inline">
 				{{csrf_field()}}
 				<div class="form-group mx-sm-3 mb-2">
 						<label for="dia" class="sr-only">Dias</label>

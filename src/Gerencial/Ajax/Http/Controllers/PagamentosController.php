@@ -3,59 +3,60 @@
 namespace Manzoli2122\Salao\Gerencial\Ajax\Http\Controllers;
 
 use Illuminate\Http\Request;
-//use Manzoli2122\Salao\Atendimento\Models\Atendimento;
 use Manzoli2122\Salao\Atendimento\Ajax\Models\Pagamento;
-//use Manzoli2122\Salao\Atendimento\Models\AtendimentoFuncionario;
-//use Manzoli2122\Salao\Atendimento\Models\ProdutosVendidos;
-//use Manzoli2122\Salao\Despesas\Models\Despesa;
-use Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes\Controller ;
 use DataTables;
 use App\Constants\ErrosSQL;
-//use Carbon\Carbon;
 
-class PagamentosController extends Controller
+
+use Manzoli2122\Pacotes\Http\Controller\DataTable\Json\DataTableJsonController ;
+
+
+class PagamentosController extends DataTableJsonController
 {
+    
+    
     protected $model;
-
-    protected $route = "pagamentos";
-
+    protected $route = "pagamentos.ajax";
     protected $name = "Pagamento";
+    protected $view = "gerencialAjax::pagamentos";
 
-    protected $view = "gerencial::pagamentos";
+
 
     public function __construct( Pagamento $pagamento  ){
         $this->middleware('auth');
-
         $this->model = $pagamento;
         
     }  
 
 
       
-    public function index()
+/**
+    * Processa a requisição AJAX do DataTable na página de listagem.
+    * Mais informações em: http://datatables.yajrabox.com
+    *
+    * @return \Illuminate\Http\JsonResponse
+    */
+    public function getDatatable()
     {
-        $models = $this->model->get(); 
-        return view("{$this->view}.index" , compact('models'));
+        $models = $this->model->getDatatable();
+        return Datatables::of($models)
+            ->addColumn('action', function($linha) {
+                if(!$linha->operadora_confirm  ){
+                    if(($linha->formaPagamento=='debito') or ($linha->formaPagamento =='credito' ))
+                    return '<button data-id="'. $linha->id . '" btn-confirmar-operadora type="button" class="btn btn-danger btn-xs" title="Confirmar Operadora"> OPERADORA <i class="fa fa-arrow-up"></i> </button> ' ;
+                }
+                else if( !$linha->caiu_conta ){
+                    return '<button data-id="'. $linha->id . '" btn-confirmar-banco type="button" class="btn btn-warning btn-xs" title="Confirmar Banco">BANCO <i class="fa fa-arrow-up"></i> </button> ';
+                }
+                else{
+                     return '';
+                }
+            })->make(true);
     }
 
 
 
 
-    public function filtrar(Request $request)
-    {       
-        $dataForm = $request->except('_token');
-        $formaPagamento = $dataForm['formaPagamento'];   
-
-        $operadora_confirm = $dataForm['operadora_confirm'];  
-
-
-        $models = $this->model->where('formaPagamento', $formaPagamento )
-                              ->where('operadora_confirm', $operadora_confirm )->get();       
-        
-        //$data = Carbon::createFromFormat('Y-m-d', $dataString);
-              
-        return view("{$this->view}.index", compact('models'));
-    }
 
 
 
@@ -109,29 +110,7 @@ class PagamentosController extends Controller
 
 
 
-     /**
-    * Processa a requisição AJAX do DataTable na página de listagem.
-    * Mais informações em: http://datatables.yajrabox.com
-    *
-    * @return \Illuminate\Http\JsonResponse
-    */
-    public function getDatatable()
-    {
-        $models = $this->model->getDatatable();
-        return Datatables::of($models)
-            ->addColumn('action', function($linha) {
-                if(!$linha->operadora_confirm  ){
-                    if(($linha->formaPagamento=='debito') or ($linha->formaPagamento =='credito' ))
-                    return '<button data-id="'. $linha->id . '" btn-confirmar-operadora type="button" class="btn btn-danger btn-xs" title="Confirmar Operadora"> OPERADORA <i class="fa fa-arrow-up"></i> </button> ' ;
-                }
-                else if( !$linha->caiu_conta ){
-                    return '<button data-id="'. $linha->id . '" btn-confirmar-banco type="button" class="btn btn-warning btn-xs" title="Confirmar Banco">BANCO <i class="fa fa-arrow-up"></i> </button> ';
-                }
-                else{
-                     return '';
-                }
-            })->make(true);
-    }
+     
 
 
 
