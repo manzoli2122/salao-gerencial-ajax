@@ -1,0 +1,32 @@
+{
+    "name": "manzoli2122/salao-gerencial-ajax",
+    "description": "Pacote Laravel",
+    "keywords": ["laravel"],
+    "license": "MIT",
+    "authors": [
+        { 
+            "name": "Bruno Manzoli do Nascimento",
+            "email": "manzoli2122@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "manzoli2122/salao-despesas-ajax": "dev-master"
+    }, 
+    
+    "autoload": {
+        
+        "psr-4": {
+            "Manzoli2122\\Salao\\Gerencial\\Ajax\\": "src/Gerencial/Ajax/"
+        }
+    },
+    "extra":{
+        "laravel":{
+            "providers":[
+                "Manzoli2122\\Salao\\Gerencial\\Ajax\\GerencialAjaxServiceProvider"
+            ]
+            
+        }
+    }
+   
+}
