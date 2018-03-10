@@ -10,14 +10,18 @@ use Manzoli2122\Salao\Atendimento\Ajax\Models\ProdutosVendidos;
 use Manzoli2122\Salao\Despesas\Ajax\Models\Despesa;
 
 
-use Manzoli2122\Salao\Cadastro\Http\Controllers\Padroes\Controller ;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use Carbon\Carbon;
 
-class GerencialController extends Controller
+class GerencialController extends BaseController
 {
  
-
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    
     protected $pagamento;
     protected $despesa;
 
