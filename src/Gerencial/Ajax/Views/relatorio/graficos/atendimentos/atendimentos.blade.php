@@ -139,11 +139,11 @@ Bem Vindo ao Sistema do Salão Espaço Vip
 
 <script src="/js/chart.js"></script>
 
-@include('gerencial::relatorio.graficos.atendimentos.gleisiane')
+@include('gerencialAjax::relatorio.graficos.atendimentos.gleisiane')
 
-@include('gerencial::relatorio.graficos.atendimentos.lusineia')
+@include('gerencialAjax::relatorio.graficos.atendimentos.lusineia')
 
-@include('gerencial::relatorio.graficos.atendimentos.luzia')
+@include('gerencialAjax::relatorio.graficos.atendimentos.luzia')
 
 
 <script>
@@ -198,7 +198,7 @@ Bem Vindo ao Sistema do Salão Espaço Vip
   	var label_diario_atendimento = [], dados_diario_atendimento = [] 
   	@for ($i = 0 ; $i < $dia ; $i++ )
 		label_diario_atendimento.push(["{{$data->addDays($i)->format('d/m')}} " ])    
-		dados_diario_atendimento.push([ {{ Manzoli2122\Salao\Atendimento\Models\Atendimento::whereDate('created_at',  $data->format('Y-m-d') )->sum('valor') }}   ])
+		dados_diario_atendimento.push([ {{ Manzoli2122\Salao\Atendimento\Ajax\Models\Atendimento::whereDate('created_at',  $data->format('Y-m-d') )->sum('valor') }}   ])
 		<?php $data->subDays($i); ?>
 	@endfor
 	

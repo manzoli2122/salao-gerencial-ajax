@@ -228,19 +228,19 @@
 
 <script src="/js/chart.js"></script>
 
-@include('gerencial::relatorio.graficos.pagamentos.total')
-@include('gerencial::relatorio.graficos.pagamentos.dinheiro')
-@include('gerencial::relatorio.graficos.pagamentos.credito')
+@include('gerencialAjax::relatorio.graficos.pagamentos.total')
+@include('gerencialAjax::relatorio.graficos.pagamentos.dinheiro')
+@include('gerencialAjax::relatorio.graficos.pagamentos.credito')
 
-@include('gerencial::relatorio.graficos.pagamentos.debito')
+@include('gerencialAjax::relatorio.graficos.pagamentos.debito')
 
-@include('gerencial::relatorio.graficos.pagamentos.cheque')
+@include('gerencialAjax::relatorio.graficos.pagamentos.cheque')
 
-@include('gerencial::relatorio.graficos.pagamentos.fiado')
+@include('gerencialAjax::relatorio.graficos.pagamentos.fiado')
 
-@include('gerencial::relatorio.graficos.pagamentos.picpay')
+@include('gerencialAjax::relatorio.graficos.pagamentos.picpay')
 
-@include('gerencial::relatorio.graficos.pagamentos.transferencia')
+@include('gerencialAjax::relatorio.graficos.pagamentos.transferencia')
 
 
 @endpush

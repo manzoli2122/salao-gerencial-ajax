@@ -48,7 +48,7 @@
     
     @for ($i = 0 ; $i < $dia ; $i++ )
     label_diario_pagamento_dinheiro.push(["{{$data->addDays($i)->format('d/m')}} " ])    
-    dados_diario_pagamento_dinheiro.push([ {{ Manzoli2122\Salao\Atendimento\Models\Pagamento::whereDate('created_at', $data->format('Y-m-d') )->where('formaPagamento', 'dinheiro')->sum('valor') }}   ])
+    dados_diario_pagamento_dinheiro.push([ {{ Manzoli2122\Salao\Atendimento\Ajax\Models\Pagamento::whereDate('created_at', $data->format('Y-m-d') )->where('formaPagamento', 'dinheiro')->sum('valor') }}   ])
     <?php $data->subDays($i); ?>
   @endfor
   

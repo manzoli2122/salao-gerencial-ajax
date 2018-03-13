@@ -50,7 +50,7 @@
 
     @for ($i = 0 ; $i < $dia ; $i++ )
     label_diario_atendimento_gringa.push(["{{$data->addDays($i)->format('d/m')}} " ])    
-    dados_diario_atendimento_gringa.push([ {{ Manzoli2122\Salao\Atendimento\Models\AtendimentoFuncionario::whereDate('created_at', $data->format('Y-m-d') )->where('funcionario_id', 5)->sum('valor') }}   ])
+    dados_diario_atendimento_gringa.push([ {{ Manzoli2122\Salao\Atendimento\Ajax\Models\AtendimentoFuncionario::whereDate('created_at', $data->format('Y-m-d') )->where('funcionario_id', 5)->sum('valor') }}   ])
     <?php $data->subDays($i); ?>
   @endfor
   
